@@ -9,7 +9,37 @@
 		<link rel="stylesheet" href="styles/styles.css" />
 	</head>
 	<body>
-		<h1>Sorting Algorithm Visualizer</h1>
+		<header>
+			<div class="text-container wrapper">
+				<h1>Sorting Algorithm Visualizer</h1>
+			</div>
+		</header>
+		<main>
+			<section class="user-controls">
+				<form action="">
+					<div class="input-container wrapper">
+						<h2>Pick a sorting type</h2>
+						<label for="sort-type" class="sr-only"
+							>Select a sorting type</label
+						>
+						<select name="sort-type" id="sort-type">
+							<option value="bubble-sort">Bubble Sort</option>
+						</select>
+						<input type="button" value="Generate sample" />
+
+						<input
+							type="button"
+							value="Start sorting"
+							id="start-sort"
+						/>
+					</div>
+				</form>
+			</section>
+			<section class="results">
+				<ul class="sample-container wrapper"></ul>
+			</section>
+		</main>
+		<footer></footer>
 		<script src="./script.js"></script>
 	</body>
 </html>
