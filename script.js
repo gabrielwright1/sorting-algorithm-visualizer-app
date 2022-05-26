@@ -6,15 +6,19 @@
 
 app = {};
 
+app.samplesArr = [];
+
 app.clearSamples = (sampleContainer) => {
 	// loop over samples in container and remove each one
 	while (sampleContainer.firstChild) {
 		sampleContainer.removeChild(sampleContainer.firstChild);
 	}
+	// remove samples from samples array
+	app.samplesArr = [];
 };
 
 app.generateSamples = () => {
-	// Fill up the samples
+	// target elements
 	const sampleContainer = document.querySelector(".sample-container");
 	const numSamples = document.querySelector("#num-samples");
 
@@ -26,17 +30,42 @@ app.generateSamples = () => {
 		return Math.floor(Math.random() * (max - min) + min);
 	};
 
-	// Generate samples and append to container
-	for (let i = 0; i <= numSamples.value; i++) {
-		// target each sample line
+	// generate samples and append to container
+	for (let i = 0; i < numSamples.value; i++) {
 		const sampleLine = document.createElement("li");
-		// give each sample a unique id
 		sampleLine.setAttribute("id", i);
+
 		// set each sample's lengths randomly
 		const randomLineLength = randomizeLength(10, 400);
 		sampleLine.style.width = `${randomLineLength}px`;
+
+		// append to samples array in namespace
+		app.samplesArr.push(randomLineLength);
+
+		// append to DOM
 		sampleContainer.append(sampleLine);
 	}
+};
+
+app.bubbleSort = (arr) => {
+	// handle swapping position of elements in array
+	const swapPositions = (arr, index1, index2) => {
+		let temp = arr[index1];
+		arr[index1] = arr[index2];
+		arr[index2] = temp;
+	};
+	// Start looping with a variable called i, at the end of the array towards the beginning
+	for (let i = arr.length; i > 0; i--) {
+		// Start an inner loop with variable called j from the beginning until i-1
+		for (let j = 0; j < i - 1; j++) {
+			console.log(arr, arr[j], arr[j + 1]);
+			// Compare if arr[j] is greater than arr[j+1], swap those two values
+			if (arr[j] > arr[j + 1]) {
+				swapPositions(arr, j, j + 1);
+			}
+		}
+	}
+	return arr;
 };
 
 app.setupSampleButton = () => {
@@ -44,11 +73,20 @@ app.setupSampleButton = () => {
 	const sampleBtn = document.querySelector("#sample-generator");
 	sampleBtn.addEventListener("click", () => {
 		app.generateSamples();
+		console.log(app.samplesArr);
+	});
+};
+
+app.setupSortingButton = () => {
+	const sortingBtn = document.querySelector("#start-sort");
+	sortingBtn.addEventListener("click", () => {
+		app.bubbleSort(app.samplesArr);
 	});
 };
 
 app.init = () => {
 	app.setupSampleButton();
+	app.setupSortingButton();
 };
 
 app.init();
