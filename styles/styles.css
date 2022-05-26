@@ -281,6 +281,11 @@ img {
   margin: 0 auto;
 }
 
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 .input-container {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -300,6 +305,18 @@ img {
 }
 
 .sample-container {
-  height: 200px;
+  height: 100%;
   border: 1px solid black;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 0px auto 30px auto;
+  padding: 20px;
+}
+
+li {
+  display: block;
+  border: 1px solid black;
+  margin: 10px 0;
 }

@@ -25,7 +25,21 @@
 						<select name="sort-type" id="sort-type">
 							<option value="bubble-sort">Bubble Sort</option>
 						</select>
-						<input type="button" value="Generate sample" />
+
+						<label for="num-samples" class="sr-only"
+							>Select a number of samples</label
+						>
+						<select name="sort-type" id="num-samples">
+							<option selected="">Select # of samples</option>
+							<option>10</option>
+							<option>50</option>
+							<option>100</option>
+						</select>
+						<input
+							type="button"
+							value="Generate sample"
+							id="sample-generator"
+						/>
 
 						<input
 							type="button"
