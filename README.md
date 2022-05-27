@@ -44,3 +44,15 @@ Bubble Sort Optimization:
 -   As the array grows in length, the optimized solution shaves off a lot of time
 -   Time complexity for unoptimized solution: O(n^2)
 -   Time complexity for optimized solution: O(2n) ~ O(n)
+
+Selection Sort Notes:
+
+-   Similar to bubble sort, except it places the smallest values into a sorted position (front of the arr) rather than the biggest value
+
+Selection Sort Pseudocode:
+
+-   Store the first element as the minimum value
+-   Compare this minimum to the next item in the array until you find the smallest number
+-   If a smaller number is found, designate the smaller number as the new "minimum" and continue until the end of the array
+-   If the "minimum" is not at the index position that you began with, swap the two values
+-   Repeat this with the next element until the array is sorted and shrink the scope of the array

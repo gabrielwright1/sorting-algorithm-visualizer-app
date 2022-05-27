@@ -54,6 +54,7 @@ app.swapPositions = (arr, index1, index2) => {
 	arr[index2] = temp;
 };
 
+// Bubble Sort
 app.bubbleSortUnoptimized = (arr) => {
 	console.log("************START UNOPTIMIZED BUBBLE SORT*************");
 
@@ -97,6 +98,16 @@ app.bubbleSortOptimized = (arr) => {
 	return arr;
 };
 
+// Selection Sort
+app.selectionSortUnoptimized = (arr) => {
+	// Store the first element as the minimum value
+	// Compare this minimum to the next item in the array until you find the smallest number
+	// If a smaller number is found, designate the smaller number as the new "minimum" and continue until the end of the array
+	// If the "minimum" is not at the index position that you began with, swap the two values
+	// Repeat this with the next element until the array is sorted and shrink the scope of the array
+	return arr;
+};
+
 app.setupSampleButton = () => {
 	// target generate sample button
 	const sampleBtn = document.querySelector("#sample-generator");
@@ -108,15 +119,31 @@ app.setupSampleButton = () => {
 
 app.setupSortingOptimizedButton = () => {
 	const btn = document.querySelector("#start-sort-optimized");
+	const sortType = document.querySelector("#sort-type");
+
 	btn.addEventListener("click", () => {
-		app.bubbleSortOptimized(app.samplesArr);
+		if (sortType.value === "bubble-sort") {
+			app.bubbleSortOptimized(app.samplesArr);
+		} else if (sortType.value === "selection-sort") {
+			app.selectionSortOptimized(app.samplesArr);
+		} else if (sortType.value === "insertion-sort") {
+			app.insertionSortOptimized(app.samplesArr);
+		}
 	});
 };
 
 app.setupSortingUnoptimizedButton = () => {
 	const btn = document.querySelector("#start-sort-unoptimized");
+	const sortType = document.querySelector("#sort-type");
+
 	btn.addEventListener("click", () => {
-		app.bubbleSortUnoptimized(app.samplesArr);
+		if (sortType.value === "bubble-sort") {
+			app.bubbleSortUnoptimized(app.samplesArr);
+		} else if (sortType.value === "selection-sort") {
+			app.selectionSortUnoptimized(app.samplesArr);
+		} else if (sortType.value === "insertion-sort") {
+			app.insertionSortUnoptimized(app.samplesArr);
+		}
 	});
 };
 
