@@ -47,13 +47,16 @@ app.generateSamples = () => {
 	}
 };
 
-app.bubbleSort = (arr) => {
+app.swapPositions = (arr, index1, index2) => {
 	// handle swapping position of elements in array
-	const swapPositions = (arr, index1, index2) => {
-		let temp = arr[index1];
-		arr[index1] = arr[index2];
-		arr[index2] = temp;
-	};
+	let temp = arr[index1];
+	arr[index1] = arr[index2];
+	arr[index2] = temp;
+};
+
+app.bubbleSortUnoptimized = (arr) => {
+	console.log("************START UNOPTIMIZED BUBBLE SORT*************");
+
 	// Start looping with a variable called i, at the end of the array towards the beginning
 	for (let i = arr.length; i > 0; i--) {
 		// Start an inner loop with variable called j from the beginning until i-1
@@ -61,10 +64,36 @@ app.bubbleSort = (arr) => {
 			console.log(arr, arr[j], arr[j + 1]);
 			// Compare if arr[j] is greater than arr[j+1], swap those two values
 			if (arr[j] > arr[j + 1]) {
-				swapPositions(arr, j, j + 1);
+				app.swapPositions(arr, j, j + 1);
 			}
 		}
 	}
+	console.log("************END UNOPTIMIZED BUBBLE SORT*************");
+
+	return arr;
+};
+
+app.bubbleSortOptimized = (arr) => {
+	console.log("************START OPTIMIZED BUBBLE SORT*************");
+
+	let noSwaps;
+	// Start looping with a variable called i, at the end of the array towards the beginning
+	for (let i = arr.length; i > 0; i--) {
+		noSwaps = true;
+		// Start an inner loop with variable called j from the beginning until i-1
+		for (let j = 0; j < i - 1; j++) {
+			console.log(arr, arr[j], arr[j + 1]);
+			// Compare if arr[j] is greater than arr[j+1], swap those two values
+			if (arr[j] > arr[j + 1]) {
+				app.swapPositions(arr, j, j + 1);
+				// Optimization: Check if last time we made any swaps, if not, step out of loop
+				noSwaps = false;
+			}
+		}
+		if (noSwaps) break;
+	}
+	console.log("************END OPTIMIZED BUBBLE SORT*************");
+
 	return arr;
 };
 
@@ -77,16 +106,24 @@ app.setupSampleButton = () => {
 	});
 };
 
-app.setupSortingButton = () => {
-	const sortingBtn = document.querySelector("#start-sort");
-	sortingBtn.addEventListener("click", () => {
-		app.bubbleSort(app.samplesArr);
+app.setupSortingOptimizedButton = () => {
+	const btn = document.querySelector("#start-sort-optimized");
+	btn.addEventListener("click", () => {
+		app.bubbleSortOptimized(app.samplesArr);
+	});
+};
+
+app.setupSortingUnoptimizedButton = () => {
+	const btn = document.querySelector("#start-sort-unoptimized");
+	btn.addEventListener("click", () => {
+		app.bubbleSortUnoptimized(app.samplesArr);
 	});
 };
 
 app.init = () => {
 	app.setupSampleButton();
-	app.setupSortingButton();
+	app.setupSortingOptimizedButton();
+	app.setupSortingUnoptimizedButton();
 };
 
 app.init();

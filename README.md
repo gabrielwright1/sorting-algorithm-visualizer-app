@@ -35,3 +35,12 @@ Bubble Sort Pseudocode:
 -   Start an inner loop with variable called j from the beginning until i-1
 -   Compare if arr[j] is greater than arr[j+1], swap those two values
 -   Return the sorted array
+
+Bubble Sort Optimization:
+
+-   To be used when the array is nearly sorted, the optimization shortens the amount of sorting as items get sorted
+-   This works by using a boolean variable (noSwaps) which flips between true/false depending on whether swaps are necessary
+-   When noSwaps = true, break the loop, when false proceed with swapping and return the swapped array.
+-   As the array grows in length, the optimized solution shaves off a lot of time
+-   Time complexity for unoptimized solution: O(n^2)
+-   Time complexity for optimized solution: O(2n) ~ O(n)
