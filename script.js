@@ -100,11 +100,28 @@ app.bubbleSortOptimized = (arr) => {
 
 // Selection Sort
 app.selectionSortUnoptimized = (arr) => {
+	console.log("************START UNOPTIMIZED SELECTION SORT*************");
 	// Store the first element as the minimum value
 	// Compare this minimum to the next item in the array until you find the smallest number
 	// If a smaller number is found, designate the smaller number as the new "minimum" and continue until the end of the array
 	// If the "minimum" is not at the index position that you began with, swap the two values
 	// Repeat this with the next element until the array is sorted and shrink the scope of the array
+
+	for (let i = 0; i < arr.length; i++) {
+		let lowest = i;
+		for (let j = i + 1; j < arr.length; j++) {
+			if (arr[j] < arr[lowest]) {
+				lowest = j;
+			}
+		}
+		if (i !== lowest) {
+			app.swapPositions(arr, i, lowest);
+			console.log(arr, "swapped: ", arr[i], arr[lowest]);
+		}
+	}
+	console.log(arr, "final result");
+
+	console.log("************END UNOPTIMIZED SELECTION SORT*************");
 	return arr;
 };
 
