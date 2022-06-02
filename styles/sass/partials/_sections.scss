@@ -1,0 +1,29 @@
+.input-container {
+	flex-direction: column;
+	h2 {
+		margin: 0;
+	}
+	select,
+	input,
+	h2 {
+		width: 200px;
+	}
+
+	select {
+		text-align: center;
+	}
+}
+
+.sample-container {
+	height: 100%;
+	border: 1px solid black;
+	flex-direction: column;
+	margin: 0px auto 30px auto;
+	padding: 20px;
+}
+
+li {
+	display: block;
+	border: 1px solid black;
+	margin: 10px 0;
+}
