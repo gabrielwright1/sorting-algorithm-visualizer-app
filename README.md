@@ -17,6 +17,10 @@ MVP Flow (Bubble Sort only)
 
 # Elementary Sorting Algorithms:
 
+-   Best used when the dataset is very small, more complex algorithms are better for larger datasets
+
+Types:
+
 -   Bubble sort
 -   Selection sort
 -   Insertion sort
@@ -30,9 +34,6 @@ Space complexity (all three - worst case):
 -   Constant space - O(1)
 
 ## Bubble Sort
-
-Worst Case - O(n<sup>2</sup>)
-Best Case - O(n)
 
 -   Larger values will bubble to the top
 -   Smaller and larger elements swap positions
@@ -52,17 +53,14 @@ Best Case - O(n)
 -   This works by using a boolean variable (noSwaps) which flips between true/false depending on whether swaps are necessary
 -   When noSwaps = true, break the loop, when false proceed with swapping and return the swapped array.
 -   As the array grows in length, the optimized solution shaves off a lot of time
--   Time complexity for unoptimized solution: O(n<sup>2</sup>):
--   Time complexity for optimized solution: O(2n) ~ O(n)
 
 ### Use Case:
 
 -   Best used on nearly sorted, the optimization shortens the amount of sorting as items get sorted
+-   Worst Case - O(n<sup>2</sup>)
+-   Best Case - O(n) - nearly sorted
 
 ## Selection Sort
-
-Worst Case - O(n<sup>2</sup>)
-Best Case - O(n<sup>2</sup>)
 
 -   Similar to bubble sort, except it places the smallest values into a sorted position (front of the arr) rather than the biggest value
 
@@ -73,16 +71,14 @@ Best Case - O(n<sup>2</sup>)
 -   If a smaller number is found, designate the smaller number as the new "minimum" and continue until the end of the array
 -   If the "minimum" is not at the index position that you began with, swap the two values
 -   Repeat this with the next element until the array is sorted and shrink the scope of the array
--   Time complexity for solution: O(n<sup>2</sup>):
 
 ### Use Case:
 
 -   If we want to minimize the number of swaps (i.e. writing to memory), because the swaps only happen at the end of the comparisons, compared to bubble sort where they happen constantly.
+-   Worst Case - O(n<sup>2</sup>)
+-   Best Case - O(n<sup>2</sup>)
 
 ## Insertion Sort
-
-Worst Case - O(n<sup>2</sup>)
-Best Case - O(n)
 
 -   Takes each element and places it where it should go in the sorted portion of the array picks an item and moves it to the correct place in the sorted portion of the array
 
@@ -92,9 +88,15 @@ Best Case - O(n)
 -   Compare the second element with the one before it and swap if necessary
 -   Continue to the next element and if it is in the correct order, iterate through the sorted portion (left side) to place the element in the correct place
 -   Repeat until the array is sorted
--   Time complexity worst case: O(n<sup>2</sup>):
--   Time complexity when the array is already partially sorted: O(n)
 
 ### Use Case
 
 -   If live data is coming in from the user, we can immediately place it where it needs to be within the left-hand sorted part of the array.
+-   Worst Case - O(n<sup>2</sup>)
+-   Best Case - O(n) - nearly sorted
+
+# Recursion (Pre-requisite for advanced sorting algorithms)
+
+# Advanced Sorting Algorithms
+
+-   Used for larger datasets

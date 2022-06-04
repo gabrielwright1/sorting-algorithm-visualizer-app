@@ -16,17 +16,34 @@ app.swapPositions = (arr, index1, index2) => {
 	arr[index2] = temp;
 };
 
-// Bubble Sort
-app.bubbleSort = (arr) => {
-	console.log("************START BUBBLE SORT*************");
+app.drawLine = (index, length) => {
+	// create and style a line based on length
+	const lineEl = document.createElement("li");
+	lineEl.setAttribute("id", index);
+	lineEl.style.width = `${length}px`;
+	return lineEl;
+};
 
+app.sleep = (ms) => {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+app.updateDOMContainer = async (arr, ms) => {
+	await app.sleep(ms);
+	app.animateSorting(arr);
+};
+
+// Bubble Sort
+app.bubbleSort = async (arr) => {
 	let noSwaps;
 	// Start looping with a variable called i, at the end of the array towards the beginning
 	for (let i = arr.length; i > 0; i--) {
 		noSwaps = true;
 		// Start an inner loop with variable called j from the beginning until i-1
 		for (let j = 0; j < i - 1; j++) {
-			console.log(arr, "swapped: ", arr[j], arr[j + 1]);
+			// update the container after a short delay
+			await app.updateDOMContainer(arr, 100);
+
 			// Compare if arr[j] is greater than arr[j+1], swap those two values
 			if (arr[j] > arr[j + 1]) {
 				app.swapPositions(arr, j, j + 1);
@@ -37,9 +54,7 @@ app.bubbleSort = (arr) => {
 		if (noSwaps) break;
 	}
 
-	console.log(arr, "final");
-	console.log("************END BUBBLE SORT*************");
-
+	app.animateSorting(arr);
 	return arr;
 };
 
@@ -107,6 +122,25 @@ app.setupSampleButton = () => {
 	});
 };
 
+// Visualization
+app.animateSorting = (arr) => {
+	// re-render the array of lines with each iteration
+	// target sample container
+	const sampleContainer = document.querySelector(".sample-container");
+
+	// clear and replace with current array iteration (don't clear namespace)
+	app.clearSamples(sampleContainer, false);
+
+	// loop over array, build a new batch of lines, append to DOM
+	for (let i = 0; i < arr.length; i++) {
+		// draw a line
+		const lineEl = app.drawLine(i, arr[i]);
+
+		// append to DOM
+		sampleContainer.append(lineEl);
+	}
+};
+
 app.setupSortingButton = () => {
 	const btn = document.querySelector("#start-sort");
 	const sortType = document.querySelector("#sort-type");
@@ -123,13 +157,15 @@ app.setupSortingButton = () => {
 };
 
 // Sample Setup
-app.clearSamples = (sampleContainer) => {
+app.clearSamples = (sampleContainer, clearNamespace) => {
 	// loop over samples in container and remove each one
 	while (sampleContainer.firstChild) {
 		sampleContainer.removeChild(sampleContainer.firstChild);
 	}
 	// remove samples from samples array
-	app.samplesArr = [];
+	if (clearNamespace) {
+		app.samplesArr = [];
+	}
 };
 
 app.generateSamples = () => {
@@ -138,7 +174,7 @@ app.generateSamples = () => {
 	const numSamples = document.querySelector("#num-samples");
 
 	// clear current list of samples
-	app.clearSamples(sampleContainer);
+	app.clearSamples(sampleContainer, true);
 
 	// generate random line length
 	const randomizeLength = (max, min) => {
@@ -147,18 +183,16 @@ app.generateSamples = () => {
 
 	// generate samples and append to container
 	for (let i = 0; i < numSamples.value; i++) {
-		const sampleLine = document.createElement("li");
-		sampleLine.setAttribute("id", i);
-
-		// set each sample's lengths randomly
 		const randomLineLength = randomizeLength(10, 400);
-		sampleLine.style.width = `${randomLineLength}px`;
 
-		// append to samples array in namespace
+		// store lengths in namespace
 		app.samplesArr.push(randomLineLength);
 
+		// create line, give it a length, create a unique id for it
+		const lineEl = app.drawLine(i, randomLineLength);
+
 		// append to DOM
-		sampleContainer.append(sampleLine);
+		sampleContainer.append(lineEl);
 	}
 };
 
