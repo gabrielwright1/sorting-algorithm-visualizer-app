@@ -38,12 +38,15 @@ Elementary Sorting Algorithms:
 
 ### Optimization:
 
--   To be used when the array is nearly sorted, the optimization shortens the amount of sorting as items get sorted
 -   This works by using a boolean variable (noSwaps) which flips between true/false depending on whether swaps are necessary
 -   When noSwaps = true, break the loop, when false proceed with swapping and return the swapped array.
 -   As the array grows in length, the optimized solution shaves off a lot of time
 -   Time complexity for unoptimized solution: O(n^2)
 -   Time complexity for optimized solution: O(2n) ~ O(n)
+
+### Use Case:
+
+-   Best used on nearly sorted, the optimization shortens the amount of sorting as items get sorted
 
 ## Selection Sort - O(n^2):
 
@@ -58,11 +61,11 @@ Elementary Sorting Algorithms:
 -   Repeat this with the next element until the array is sorted and shrink the scope of the array
 -   Time complexity for solution: O(n^2)
 
-Selection Sort - Only Use Case:
+### Use Case:
 
 -   If we want to minimize the number of swaps (i.e. writing to memory), because the swaps only happen at the end of the comparisons, compared to bubble sort where they happen constantly.
 
-## Insertion Sort:
+## Insertion Sort - O(n^2):
 
 -   Takes each element and places it where it should go in the sorted portion of the array picks an item and moves it to the correct place in the sorted portion of the array
 
@@ -74,3 +77,7 @@ Selection Sort - Only Use Case:
 -   Repeat until the array is sorted
 -   Time complexity worst case: O(n^2)
 -   Time complexity when the array is already partially sorted: O(n)
+
+### Use Case
+
+-   If live data is coming in from the user, we can immediately place it where it needs to be within the left-hand sorted part of the array.
