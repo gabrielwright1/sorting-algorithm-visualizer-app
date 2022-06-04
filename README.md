@@ -15,13 +15,24 @@ MVP Flow (Bubble Sort only)
 -   Demonstrate the sorting happening on the screen using animations/transitions
 -   Indicate to the user when the sorting starts/ends
 
-Elementary Sorting Algorithms:
+# Elementary Sorting Algorithms:
 
 -   Bubble sort
 -   Selection sort
 -   Insertion sort
 
-## Bubble Sort - O(n):
+Time complexity (all three - worst case):
+
+-   Quadratic time - O(n<sup>2</sup>)
+
+Space complexity (all three - worst case):
+
+-   Constant space - O(1)
+
+## Bubble Sort
+
+Worst Case - O(n<sup>2</sup>)
+Best Case - O(n)
 
 -   Larger values will bubble to the top
 -   Smaller and larger elements swap positions
@@ -48,7 +59,10 @@ Elementary Sorting Algorithms:
 
 -   Best used on nearly sorted, the optimization shortens the amount of sorting as items get sorted
 
-## Selection Sort - O(n<sup>2</sup>):
+## Selection Sort
+
+Worst Case - O(n<sup>2</sup>)
+Best Case - O(n<sup>2</sup>)
 
 -   Similar to bubble sort, except it places the smallest values into a sorted position (front of the arr) rather than the biggest value
 
@@ -65,7 +79,10 @@ Elementary Sorting Algorithms:
 
 -   If we want to minimize the number of swaps (i.e. writing to memory), because the swaps only happen at the end of the comparisons, compared to bubble sort where they happen constantly.
 
-## Insertion Sort - O(n<sup>2</sup>):
+## Insertion Sort
+
+Worst Case - O(n<sup>2</sup>)
+Best Case - O(n)
 
 -   Takes each element and places it where it should go in the sorted portion of the array picks an item and moves it to the correct place in the sorted portion of the array
 
