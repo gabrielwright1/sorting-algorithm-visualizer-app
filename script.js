@@ -84,7 +84,7 @@ app.bubbleSort = async (arr) => {
 };
 
 // Selection Sort
-app.selectionSort = (arr) => {
+app.selectionSort = async (arr) => {
 	// Store the first element as the minimum value
 	// Compare this minimum to the next item in the array until you find the smallest number
 	// If a smaller number is found, designate the smaller number as the new "minimum" and continue until the end of the array
@@ -100,14 +100,27 @@ app.selectionSort = (arr) => {
 		}
 		if (i !== lowest) {
 			app.swapPositions(arr, i, lowest);
+
+			// update the container after a short delay
+			await app.sleep(100);
+			app.animateSorting(arr);
+
 			console.log(arr, "swapped: ", arr[i], arr[lowest]);
 		}
 	}
-	console.log(arr, "final");
+	// update the DOM with final array
+	app.animateSorting(arr);
+
+	// update flag
+	app.isSorting = false;
+
+	// reset buttons
+	app.toggleDisable("#generate-sample");
+	app.toggleDisable("#stop-sort");
 };
 
 // Insertion Sort
-app.insertionSort = (arr) => {
+app.insertionSort = async (arr) => {
 	// Pick the second element in the array
 	// Compare the second element with the one before it and swap if necessary
 	// Continue to the next element and if it is in the correct order, iterate through the sorted portion (left side) to place the element in the correct place
@@ -126,9 +139,20 @@ app.insertionSort = (arr) => {
 		// once loop terminates, we've found the correct spot (j)
 		// insert the currentVal that we set aside to the right of the current value
 		arr[j + 1] = current;
-		console.log(arr, "inserted: ", current);
+
+		// update the container after a short delay
+		await app.sleep(100);
+		app.animateSorting(arr);
 	}
-	console.log(arr, "final");
+
+	app.animateSorting(arr);
+
+	// update flag
+	app.isSorting = false;
+
+	// reset buttons
+	app.toggleDisable("#generate-sample");
+	app.toggleDisable("#stop-sort");
 };
 
 // UI Setup
