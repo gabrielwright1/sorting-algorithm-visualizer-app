@@ -54,28 +54,8 @@ app.swapPositions = (arr, index1, index2) => {
 	arr[index2] = temp;
 };
 
-// Bubble Sort
-app.bubbleSortUnoptimized = (arr) => {
-	console.log("************START UNOPTIMIZED BUBBLE SORT*************");
-
-	// Start looping with a variable called i, at the end of the array towards the beginning
-	for (let i = arr.length; i > 0; i--) {
-		// Start an inner loop with variable called j from the beginning until i-1
-		for (let j = 0; j < i - 1; j++) {
-			console.log(arr, arr[j], arr[j + 1]);
-			// Compare if arr[j] is greater than arr[j+1], swap those two values
-			if (arr[j] > arr[j + 1]) {
-				app.swapPositions(arr, j, j + 1);
-			}
-		}
-	}
-	console.log("************END UNOPTIMIZED BUBBLE SORT*************");
-
-	return arr;
-};
-
-app.bubbleSortOptimized = (arr) => {
-	console.log("************START OPTIMIZED BUBBLE SORT*************");
+app.bubbleSort = (arr) => {
+	console.log("************START BUBBLE SORT*************");
 
 	let noSwaps;
 	// Start looping with a variable called i, at the end of the array towards the beginning
@@ -83,7 +63,7 @@ app.bubbleSortOptimized = (arr) => {
 		noSwaps = true;
 		// Start an inner loop with variable called j from the beginning until i-1
 		for (let j = 0; j < i - 1; j++) {
-			console.log(arr, arr[j], arr[j + 1]);
+			console.log(arr, "swapped: ", arr[j], arr[j + 1]);
 			// Compare if arr[j] is greater than arr[j+1], swap those two values
 			if (arr[j] > arr[j + 1]) {
 				app.swapPositions(arr, j, j + 1);
@@ -93,14 +73,16 @@ app.bubbleSortOptimized = (arr) => {
 		}
 		if (noSwaps) break;
 	}
-	console.log("************END OPTIMIZED BUBBLE SORT*************");
+
+	console.log(arr, "final result");
+	console.log("************END BUBBLE SORT*************");
 
 	return arr;
 };
 
 // Selection Sort
-app.selectionSortUnoptimized = (arr) => {
-	console.log("************START UNOPTIMIZED SELECTION SORT*************");
+app.selectionSort = (arr) => {
+	console.log("************START SELECTION SORT*************");
 	// Store the first element as the minimum value
 	// Compare this minimum to the next item in the array until you find the smallest number
 	// If a smaller number is found, designate the smaller number as the new "minimum" and continue until the end of the array
@@ -121,7 +103,7 @@ app.selectionSortUnoptimized = (arr) => {
 	}
 	console.log(arr, "final result");
 
-	console.log("************END UNOPTIMIZED SELECTION SORT*************");
+	console.log("************END SELECTION SORT*************");
 	return arr;
 };
 
@@ -134,40 +116,24 @@ app.setupSampleButton = () => {
 	});
 };
 
-app.setupSortingOptimizedButton = () => {
-	const btn = document.querySelector("#start-sort-optimized");
+app.setupSortingButton = () => {
+	const btn = document.querySelector("#start-sort");
 	const sortType = document.querySelector("#sort-type");
 
 	btn.addEventListener("click", () => {
 		if (sortType.value === "bubble-sort") {
-			app.bubbleSortOptimized(app.samplesArr);
+			app.bubbleSort(app.samplesArr);
 		} else if (sortType.value === "selection-sort") {
-			app.selectionSortOptimized(app.samplesArr);
+			app.selectionSort(app.samplesArr);
 		} else if (sortType.value === "insertion-sort") {
-			app.insertionSortOptimized(app.samplesArr);
-		}
-	});
-};
-
-app.setupSortingUnoptimizedButton = () => {
-	const btn = document.querySelector("#start-sort-unoptimized");
-	const sortType = document.querySelector("#sort-type");
-
-	btn.addEventListener("click", () => {
-		if (sortType.value === "bubble-sort") {
-			app.bubbleSortUnoptimized(app.samplesArr);
-		} else if (sortType.value === "selection-sort") {
-			app.selectionSortUnoptimized(app.samplesArr);
-		} else if (sortType.value === "insertion-sort") {
-			app.insertionSortUnoptimized(app.samplesArr);
+			app.insertionSort(app.samplesArr);
 		}
 	});
 };
 
 app.init = () => {
 	app.setupSampleButton();
-	app.setupSortingOptimizedButton();
-	app.setupSortingUnoptimizedButton();
+	app.setupSortingButton();
 };
 
 app.init();

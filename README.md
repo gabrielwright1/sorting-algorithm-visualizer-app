@@ -1,4 +1,4 @@
-Sorting Algorithm Visualizer
+# Sorting Algorithm Visualizer
 
 How it works
 
@@ -21,7 +21,7 @@ Elementary Sorting Algorithms:
 -   Selection sort
 -   Insertion sort
 
-Bubble Sort Notes:
+## Bubble Sort - O(n):
 
 -   Larger values will bubble to the top
 -   Smaller and larger elements swap positions
@@ -45,7 +45,7 @@ Bubble Sort Optimization:
 -   Time complexity for unoptimized solution: O(n^2)
 -   Time complexity for optimized solution: O(2n) ~ O(n)
 
-Selection Sort Notes:
+## Selection Sort - O(n^2):
 
 -   Similar to bubble sort, except it places the smallest values into a sorted position (front of the arr) rather than the biggest value
 
@@ -56,3 +56,19 @@ Selection Sort Pseudocode:
 -   If a smaller number is found, designate the smaller number as the new "minimum" and continue until the end of the array
 -   If the "minimum" is not at the index position that you began with, swap the two values
 -   Repeat this with the next element until the array is sorted and shrink the scope of the array
+-   Time complexity for solution: O(n^2)
+
+Selection Sort - Only Use Case:
+
+-   If we want to minimize the number of swaps (i.e. writing to memory), because the swaps only happen at the end of the comparisons, compared to bubble sort where they happen constantly.
+
+## Insertion Sort:
+
+-   Takes each element and places it where it should go in the sorted portion of the array picks an item and moves it to the correct place in the sorted portion of the array
+
+Insertion Sort Pseudocode:
+
+-   Pick the second element in the array
+-   Compare the second element with the one before it and swap if necessary
+-   Continue to the next element and if it is in the correct order, iterate through the sorted portion (left side) to place the element in the correct place
+-   Repeat until the array is sorted
