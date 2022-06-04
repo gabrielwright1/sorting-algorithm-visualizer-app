@@ -1,6 +1,6 @@
 # Sorting Algorithm Visualizer
 
-How it works
+How this app works:
 
 -   User selects a sorting algorithm from a dropdown
 -   Once option is selected, store user input in a variable
@@ -28,7 +28,7 @@ Elementary Sorting Algorithms:
 -   As items get solidified, the number of items needed to sort decreases
 -   Not very efficient, but important because other algorithms build upon it
 
-Bubble Sort Pseudocode:
+### Pseudocode:
 
 -   Define a function called bubble sort, it takes in an array (assume its all numbers)
 -   Start looping with a variable called i, at the end of the array towards the beginning
@@ -36,7 +36,7 @@ Bubble Sort Pseudocode:
 -   Compare if arr[j] is greater than arr[j+1], swap those two values
 -   Return the sorted array
 
-Bubble Sort Optimization:
+### Optimization:
 
 -   To be used when the array is nearly sorted, the optimization shortens the amount of sorting as items get sorted
 -   This works by using a boolean variable (noSwaps) which flips between true/false depending on whether swaps are necessary
@@ -49,7 +49,7 @@ Bubble Sort Optimization:
 
 -   Similar to bubble sort, except it places the smallest values into a sorted position (front of the arr) rather than the biggest value
 
-Selection Sort Pseudocode:
+### Pseudocode:
 
 -   Store the first element as the minimum value
 -   Compare this minimum to the next item in the array until you find the smallest number
@@ -66,9 +66,11 @@ Selection Sort - Only Use Case:
 
 -   Takes each element and places it where it should go in the sorted portion of the array picks an item and moves it to the correct place in the sorted portion of the array
 
-Insertion Sort Pseudocode:
+### Pseudocode:
 
 -   Pick the second element in the array
 -   Compare the second element with the one before it and swap if necessary
 -   Continue to the next element and if it is in the correct order, iterate through the sorted portion (left side) to place the element in the correct place
 -   Repeat until the array is sorted
+-   Time complexity worst case: O(n^2)
+-   Time complexity when the array is already partially sorted: O(n)
