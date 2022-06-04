@@ -47,7 +47,7 @@
 						<input
 							type="button"
 							value="Generate sample"
-							id="sample-generator"
+							id="generate-sample"
 						/>
 
 						<input
@@ -55,14 +55,28 @@
 							value="Start sorting"
 							id="start-sort"
 						/>
+
+						<input
+							type="button"
+							value="Stop sorting"
+							id="stop-sort"
+						/>
 					</div>
 				</form>
 			</section>
 			<section class="results">
+				<h2>Samples</h2>
 				<ul class="sample-container wrapper"></ul>
 			</section>
 		</main>
 		<footer></footer>
+		<!-- import jquery -->
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
+		<!-- custom script -->
 		<script src="./script.js"></script>
 	</body>
 </html>

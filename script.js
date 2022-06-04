@@ -7,6 +7,7 @@
 app = {};
 
 app.samplesArr = [];
+app.isSorting = false;
 
 // Utility
 app.swapPositions = (arr, index1, index2) => {
@@ -28,100 +29,6 @@ app.sleep = (ms) => {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
-app.updateDOMContainer = async (arr, ms) => {
-	await app.sleep(ms);
-	app.animateSorting(arr);
-};
-
-// Bubble Sort
-app.bubbleSort = async (arr) => {
-	let noSwaps;
-	// Start looping with a variable called i, at the end of the array towards the beginning
-	for (let i = arr.length; i > 0; i--) {
-		noSwaps = true;
-		// Start an inner loop with variable called j from the beginning until i-1
-		for (let j = 0; j < i - 1; j++) {
-			// update the container after a short delay
-			await app.updateDOMContainer(arr, 100);
-
-			// Compare if arr[j] is greater than arr[j+1], swap those two values
-			if (arr[j] > arr[j + 1]) {
-				app.swapPositions(arr, j, j + 1);
-				// Optimization: Check if last time we made any swaps, if not, step out of loop
-				noSwaps = false;
-			}
-		}
-		if (noSwaps) break;
-	}
-
-	app.animateSorting(arr);
-	return arr;
-};
-
-// Selection Sort
-app.selectionSort = (arr) => {
-	console.log("************START SELECTION SORT*************");
-	// Store the first element as the minimum value
-	// Compare this minimum to the next item in the array until you find the smallest number
-	// If a smaller number is found, designate the smaller number as the new "minimum" and continue until the end of the array
-	// If the "minimum" is not at the index position that you began with, swap the two values
-	// Repeat this with the next element until the array is sorted and shrink the scope of the array
-
-	for (let i = 0; i < arr.length; i++) {
-		let lowest = i;
-		for (let j = i + 1; j < arr.length; j++) {
-			if (arr[j] < arr[lowest]) {
-				lowest = j;
-			}
-		}
-		if (i !== lowest) {
-			app.swapPositions(arr, i, lowest);
-			console.log(arr, "swapped: ", arr[i], arr[lowest]);
-		}
-	}
-	console.log(arr, "final");
-
-	console.log("************END SELECTION SORT*************");
-	return arr;
-};
-
-// Insertion Sort
-app.insertionSort = (arr) => {
-	console.log("************START INSERTION SORT*************");
-	// Pick the second element in the array
-	// Compare the second element with the one before it and swap if necessary
-	// Continue to the next element and if it is in the correct order, iterate through the sorted portion (left side) to place the element in the correct place
-	// Repeat until the array is sorted
-
-	for (let i = 1; i < arr.length; i++) {
-		// set aside the current value in a variable
-		let current = arr[i];
-		let j;
-		// loop from right to left, until either the current value is smaller or end of array
-		for (j = i - 1; j >= 0 && arr[j] > current; j--) {
-			// copy/paste current element (j) to the right (j+1)
-			arr[j + 1] = arr[j];
-		}
-		// once loop terminates, we've found the correct spot (j)
-		// insert the currentVal that we set aside to the right of the current value
-		arr[j + 1] = current;
-		console.log(arr, "inserted: ", current);
-	}
-	console.log(arr, "final");
-	console.log("************END INSERTION SORT*************");
-	return arr;
-};
-
-// UI Setup
-app.setupSampleButton = () => {
-	// target generate sample button
-	const sampleBtn = document.querySelector("#sample-generator");
-	sampleBtn.addEventListener("click", () => {
-		app.generateSamples();
-		console.log(app.samplesArr, "start");
-	});
-};
-
 // Visualization
 app.animateSorting = (arr) => {
 	// re-render the array of lines with each iteration
@@ -141,11 +48,119 @@ app.animateSorting = (arr) => {
 	}
 };
 
-app.setupSortingButton = () => {
+// Bubble Sort
+app.bubbleSort = async (arr) => {
+	let noSwaps;
+	// Start looping with a variable called i, at the end of the array towards the beginning
+	for (let i = arr.length; i > 0; i--) {
+		noSwaps = true;
+		// Start an inner loop with variable called j from the beginning until i-1
+		for (let j = 0; j < i - 1; j++) {
+			// pause sorting if user selects "stop"
+			if (app.isSorting) {
+				// update the container after a short delay
+				await app.sleep(100);
+				app.animateSorting(arr);
+
+				// Compare if arr[j] is greater than arr[j+1], swap those two values
+				if (arr[j] > arr[j + 1]) {
+					app.swapPositions(arr, j, j + 1);
+					// Optimization: Check if last time we made any swaps, if not, step out of loop
+					noSwaps = false;
+				}
+			}
+		}
+		if (noSwaps) break;
+	}
+	// update the DOM with final array
+	app.animateSorting(arr);
+
+	// update flag
+	app.isSorting = false;
+
+	// reset buttons
+	app.toggleDisable("#generate-sample");
+	app.toggleDisable("#stop-sort");
+};
+
+// Selection Sort
+app.selectionSort = (arr) => {
+	// Store the first element as the minimum value
+	// Compare this minimum to the next item in the array until you find the smallest number
+	// If a smaller number is found, designate the smaller number as the new "minimum" and continue until the end of the array
+	// If the "minimum" is not at the index position that you began with, swap the two values
+	// Repeat this with the next element until the array is sorted and shrink the scope of the array
+
+	for (let i = 0; i < arr.length; i++) {
+		let lowest = i;
+		for (let j = i + 1; j < arr.length; j++) {
+			if (arr[j] < arr[lowest]) {
+				lowest = j;
+			}
+		}
+		if (i !== lowest) {
+			app.swapPositions(arr, i, lowest);
+			console.log(arr, "swapped: ", arr[i], arr[lowest]);
+		}
+	}
+	console.log(arr, "final");
+};
+
+// Insertion Sort
+app.insertionSort = (arr) => {
+	// Pick the second element in the array
+	// Compare the second element with the one before it and swap if necessary
+	// Continue to the next element and if it is in the correct order, iterate through the sorted portion (left side) to place the element in the correct place
+	// Repeat until the array is sorted
+
+	for (let i = 1; i < arr.length; i++) {
+		// set aside the current value in a variable
+		let current = arr[i];
+		// declare inner counter in outer loop
+		let j;
+		// loop from right to left, until either the current value is smaller or end of array
+		for (j = i - 1; j >= 0 && arr[j] > current; j--) {
+			// copy/paste current element (j) to the right (j+1)
+			arr[j + 1] = arr[j];
+		}
+		// once loop terminates, we've found the correct spot (j)
+		// insert the currentVal that we set aside to the right of the current value
+		arr[j + 1] = current;
+		console.log(arr, "inserted: ", current);
+	}
+	console.log(arr, "final");
+};
+
+// UI Setup
+app.setupGenerateButton = () => {
+	// target generate sample button
+	const sampleBtn = document.querySelector("#generate-sample");
+	sampleBtn.addEventListener("click", () => {
+		// toggle sorting buttons
+		app.enableSorting();
+		// only generate samples if the algorithm isn't running
+		if (!app.isSorting) {
+			app.generateSamples();
+			console.log(app.samplesArr, "start");
+		}
+	});
+};
+
+app.setupStartButton = () => {
 	const btn = document.querySelector("#start-sort");
 	const sortType = document.querySelector("#sort-type");
 
+	// initially disable button until sample is generated
+	btn.disabled = true;
+
 	btn.addEventListener("click", () => {
+		// update flag
+		app.isSorting = true;
+		app.toggleDisable("#start-sort");
+		app.toggleDisable("#generate-sample");
+		app.toggleDisable("#stop-sort");
+
+		// check for user input
 		if (sortType.value === "bubble-sort") {
 			app.bubbleSort(app.samplesArr);
 		} else if (sortType.value === "selection-sort") {
@@ -156,18 +171,36 @@ app.setupSortingButton = () => {
 	});
 };
 
-// Sample Setup
-app.clearSamples = (sampleContainer, clearNamespace) => {
-	// loop over samples in container and remove each one
-	while (sampleContainer.firstChild) {
-		sampleContainer.removeChild(sampleContainer.firstChild);
-	}
-	// remove samples from samples array
-	if (clearNamespace) {
-		app.samplesArr = [];
+app.setupStopButton = () => {
+	// target stop button, add a click listener, update isSorting flag to false
+	const btn = document.querySelector("#stop-sort");
+
+	// initially disable button until sample is generated
+	btn.disabled = true;
+
+	btn.addEventListener("click", () => {
+		app.isSorting = false;
+		app.toggleDisable("#start-sort");
+	});
+};
+
+app.toggleDisable = (buttonId) => {
+	// depending on which button type is passed in, target element, and toggle disabled
+	const btn = document.querySelector(`${buttonId}`);
+
+	if (btn.disabled) {
+		btn.disabled = false;
+	} else {
+		btn.disabled = true;
 	}
 };
 
+app.enableSorting = () => {
+	const startBtn = document.querySelector("#start-sort");
+	startBtn.disabled = false;
+};
+
+// Sample Setup
 app.generateSamples = () => {
 	// target elements
 	const sampleContainer = document.querySelector(".sample-container");
@@ -196,9 +229,23 @@ app.generateSamples = () => {
 	}
 };
 
-app.init = () => {
-	app.setupSampleButton();
-	app.setupSortingButton();
+app.clearSamples = (sampleContainer, isClearingNamespace) => {
+	// loop over samples in container and remove each one
+	while (sampleContainer.firstChild) {
+		sampleContainer.removeChild(sampleContainer.firstChild);
+	}
+	// remove samples from samples array
+	if (isClearingNamespace) {
+		app.samplesArr = [];
+	}
 };
 
-app.init();
+app.init = () => {
+	app.setupGenerateButton();
+	app.setupStartButton();
+	app.setupStopButton();
+};
+
+$(() => {
+	app.init();
+});
