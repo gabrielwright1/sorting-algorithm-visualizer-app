@@ -320,3 +320,13 @@ li {
   border: 1px solid black;
   margin: 10px 0;
 }
+
+.results .wrapper {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.results ul {
+  margin: 0;
+}
