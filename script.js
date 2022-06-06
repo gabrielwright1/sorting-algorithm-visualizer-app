@@ -92,20 +92,22 @@ app.selectionSort = async (arr) => {
 	// Repeat this with the next element until the array is sorted and shrink the scope of the array
 
 	for (let i = 0; i < arr.length; i++) {
-		let lowest = i;
-		for (let j = i + 1; j < arr.length; j++) {
-			if (arr[j] < arr[lowest]) {
-				lowest = j;
+		if (app.isSorting) {
+			let lowest = i;
+			for (let j = i + 1; j < arr.length; j++) {
+				if (arr[j] < arr[lowest]) {
+					lowest = j;
+				}
 			}
-		}
-		if (i !== lowest) {
-			app.swapPositions(arr, i, lowest);
+			if (i !== lowest) {
+				app.swapPositions(arr, i, lowest);
 
-			// update the container after a short delay
-			await app.sleep(100);
-			app.animateSorting(arr);
+				// update the container after a short delay
+				await app.sleep(100);
+				app.animateSorting(arr);
 
-			console.log(arr, "swapped: ", arr[i], arr[lowest]);
+				console.log(arr, "swapped: ", arr[i], arr[lowest]);
+			}
 		}
 	}
 	// update the DOM with final array
@@ -127,22 +129,24 @@ app.insertionSort = async (arr) => {
 	// Repeat until the array is sorted
 
 	for (let i = 1; i < arr.length; i++) {
-		// set aside the current value in a variable
-		let current = arr[i];
-		// declare inner counter in outer loop
-		let j;
-		// loop from right to left, until either the current value is smaller or end of array
-		for (j = i - 1; j >= 0 && arr[j] > current; j--) {
-			// copy/paste current element (j) to the right (j+1)
-			arr[j + 1] = arr[j];
-		}
-		// once loop terminates, we've found the correct spot (j)
-		// insert the currentVal that we set aside to the right of the current value
-		arr[j + 1] = current;
+		if (app.isSorting) {
+			// set aside the current value in a variable
+			let current = arr[i];
+			// declare inner counter in outer loop
+			let j;
+			// loop from right to left, until either the current value is smaller or end of array
+			for (j = i - 1; j >= 0 && arr[j] > current; j--) {
+				// copy/paste current element (j) to the right (j+1)
+				arr[j + 1] = arr[j];
+			}
+			// once loop terminates, we've found the correct spot (j)
+			// insert the currentVal that we set aside to the right of the current value
+			arr[j + 1] = current;
 
-		// update the container after a short delay
-		await app.sleep(100);
-		app.animateSorting(arr);
+			// update the container after a short delay
+			await app.sleep(100);
+			app.animateSorting(arr);
+		}
 	}
 
 	app.animateSorting(arr);
