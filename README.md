@@ -94,9 +94,3 @@ Space complexity (all three - worst case):
 -   If live data is coming in from the user, we can immediately place it where it needs to be within the left-hand sorted part of the array.
 -   Worst Case - O(n<sup>2</sup>)
 -   Best Case - O(n) - nearly sorted
-
-# Recursion (Pre-requisite for advanced sorting algorithms)
-
-# Advanced Sorting Algorithms
-
--   Used for larger datasets
