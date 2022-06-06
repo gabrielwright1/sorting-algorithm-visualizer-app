@@ -9,7 +9,74 @@
 		<link rel="stylesheet" href="styles/styles.css" />
 	</head>
 	<body>
-		<h1>Sorting Algorithm Visualizer</h1>
+		<header>
+			<div class="text-container wrapper">
+				<h1>Sorting Algorithm Visualizer</h1>
+			</div>
+		</header>
+		<main>
+			<section class="user-controls">
+				<form action="">
+					<div class="input-container wrapper">
+						<h2>Pick a sorting type</h2>
+						<label for="sort-type" class="sr-only"
+							>Select a sorting type</label
+						>
+						<select name="sort-type" id="sort-type">
+							<option value="bubble-sort">Bubble Sort</option>
+							<option value="selection-sort">
+								Selection Sort
+							</option>
+							<option value="insertion-sort">
+								Insertion Sort
+							</option>
+<!-- 							<option value="merge-sort">Merge Sort</option>
+							<option value="quick-sort">Quick Sort</option>
+							<option value="radix-sort">Radix Sort</option> -->
+						</select>
+
+						<label for="num-samples" class="sr-only"
+							>Select a number of samples</label
+						>
+						<select name="sort-type" id="num-samples">
+							<option selected="">Select # of samples</option>
+							<option>5</option>
+							<option>15</option>
+							<option>25</option>
+						</select>
+						<input
+							type="button"
+							value="Generate sample"
+							id="generate-sample"
+						/>
+
+						<input
+							type="button"
+							value="Start sorting"
+							id="start-sort"
+						/>
+
+						<input
+							type="button"
+							value="Stop sorting"
+							id="stop-sort"
+						/>
+					</div>
+				</form>
+			</section>
+			<section class="results">
+				<h2>Samples</h2>
+				<ul class="sample-container wrapper"></ul>
+			</section>
+		</main>
+		<footer></footer>
+		<!-- import jquery -->
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
+		<!-- custom script -->
 		<script src="./script.js"></script>
 	</body>
 </html>
