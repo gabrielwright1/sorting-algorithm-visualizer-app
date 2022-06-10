@@ -95,7 +95,7 @@ Space complexity (all three - worst case):
 -   Worst Case - O(n<sup>2</sup>)
 -   Best Case - O(n) - nearly sorted
 
-# Recursion (Pre-requisite for advanced sorting algorithms)
+# Recursion
 
 ## Objectives
 
