@@ -97,6 +97,36 @@ Space complexity (all three - worst case):
 
 # Recursion (Pre-requisite for advanced sorting algorithms)
 
-# Advanced Sorting Algorithms
+## Objectives
 
--   Used for larger datasets
+-   Define recursion and how it can be used
+-   Understand two essential components of a recursive function
+-   Visualize the call stack o better debug and understand recursive functions
+
+### What is recursion?
+
+-   A process/function that calls itself
+-   An alternative to an iterative approach
+-   Adds/removes function invocations from call stack (FILO)
+
+## Examples of recursion:
+
+-   JSON.parse or JSON.stringify
+-   document.getElementById or DOM traversal algorithms
+-   Object traversal
+-   Complex data structures
+
+## Parts of recursive function:
+
+-   Base case (end condition)
+-   Different input
+
+## Common Pitfalls
+
+-   Missing a base case (infinite recursion = stack overflow)
+
+## Helper Method Recursion
+
+-   Two functions: outer function (we call this) and inner function (performs recursion)
+-   Outer: we define results container in the outer scope
+-   Inner: we perform recursion and populate the results container (i.e. inner function can see outer scope due to a closure being created when the inner function was invoked)

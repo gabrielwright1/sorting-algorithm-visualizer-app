@@ -104,8 +104,6 @@ app.selectionSort = async (arr) => {
 			// update the container after a short delay
 			await app.sleep(100);
 			app.animateSorting(arr);
-
-			console.log(arr, "swapped: ", arr[i], arr[lowest]);
 		}
 	}
 	// update the DOM with final array
