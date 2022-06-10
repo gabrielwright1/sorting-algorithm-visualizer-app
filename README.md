@@ -132,8 +132,7 @@ Space complexity (all three - worst case):
 
 ### Helper Method Recursion:
 
-Two nested functions: outer (non-recursive) and inner (recursive)
-
+-   Two nested functions: outer (non-recursive) and inner (recursive)
 -   Outer: we define results container in the outer scope
 -   Inner: we perform recursion and populate the results container (i.e. inner function can see outer scope due to a closure being created when the inner function was invoked)
 
@@ -143,7 +142,7 @@ Two nested functions: outer (non-recursive) and inner (recursive)
 -   No external data structure
 -   Harder to understand
 
-Tips to avoid mutating datastructures:
+#### Tips to avoid mutating datastructures:
 
 -   Arrays: use slice, spread, or concat to create copies
 -   Objects: use spread, or Object.assign
