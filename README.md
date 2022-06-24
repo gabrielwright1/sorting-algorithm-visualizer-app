@@ -1,5 +1,8 @@
 # Sorting Algorithm Visualizer
 
+Live demo:
+- https://gabriel-wright-sorting-algorithm-visualizer.netlify.app/
+
 How this app works:
 
 -   User selects a sorting algorithm from a dropdown
