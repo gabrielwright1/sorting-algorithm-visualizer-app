@@ -1,4 +1,4 @@
-# Sorting Algorithm Visualizer
+# Sorting Algorithm Visualizer (Work In Progress)
 
 Live demo:
 - https://gabriel-wright-sorting-algorithm-visualizer.netlify.app/
